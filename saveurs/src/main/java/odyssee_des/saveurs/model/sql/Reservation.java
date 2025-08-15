@@ -1,8 +1,13 @@
 package odyssee_des.saveurs.model.sql;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import odyssee_des.saveurs.inc.ReservationStatus;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -19,6 +24,12 @@ public class Reservation {
     private Time preferedTime;
     private String specialRequests;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ReservationStatus status = ReservationStatus.EN_ATTENTE;
+
+
+    
     public Long getId() {
         return id;
     }
@@ -68,5 +79,12 @@ public class Reservation {
         this.specialRequests = specialRequests;
     }
 
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
+    }
 
 }
