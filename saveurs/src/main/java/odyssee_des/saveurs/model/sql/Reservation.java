@@ -15,7 +15,7 @@ import java.sql.Time;
 public class Reservation {
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
     private String fullname;
     private String email;
     private Double phone;
@@ -30,10 +30,10 @@ public class Reservation {
 
 
     
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getFullname() {

@@ -3,11 +3,13 @@ package odyssee_des.saveurs.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
 import odyssee_des.saveurs.model.sql.Dishes;
 import odyssee_des.saveurs.repository.DishesRepository;
 
+@Service
 public class DishesService {
     private final DishesRepository dsh;
 
