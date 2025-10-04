@@ -63,7 +63,7 @@ public class DishesController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteDish(@PathVariable long id) {
         dservice.deleteDishes(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     
 }
