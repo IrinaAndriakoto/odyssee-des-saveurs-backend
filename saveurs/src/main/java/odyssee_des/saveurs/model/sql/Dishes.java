@@ -16,8 +16,15 @@ public class Dishes {
     private String description;
     private String img;
     private Double prix;
+    private boolean dispo;
 
     
+    public boolean isDispo() {
+        return dispo;
+    }
+    public void setDispo(boolean dispo) {
+        this.dispo = dispo;
+    }
     public Long getId() {
         return id;
     }
@@ -48,4 +55,5 @@ public class Dishes {
     public void setPrix(Double prix) {
         this.prix = prix;
     }
+
 }

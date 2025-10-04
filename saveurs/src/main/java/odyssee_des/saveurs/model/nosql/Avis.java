@@ -8,7 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Avis {
     @Id
     private String id;
-    private Long clientId;
+    private String username;
+    private String email_user;
     private String commentaire;
     private int note;
     private LocalDateTime date;
@@ -19,11 +20,17 @@ public class Avis {
     public void setId(String id) {
         this.id = id;
     }
-    public Long getClientId() {
-        return clientId;
+    public String getUsername(){
+        return username;
     }
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setUsername(String u){
+        this.username = u;
+    }
+    public String getEmailUser(){
+        return email_user;
+    }
+    public void setEmailUser(String eu){
+        this.email_user = eu;
     }
     public String getCommentaire() {
         return commentaire;
