@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import odyssee_des.saveurs.model.sql.Table;
+import odyssee_des.saveurs.model.sql.Tables;
 import odyssee_des.saveurs.service.TableService;
 
 public class TableController {
@@ -24,13 +24,13 @@ public class TableController {
     }
 
     @GetMapping("/getAll")
-    public List<Table> getAllTables() {
+    public List<Tables> getAllTables() {
         return tableService.getAllTables();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Table> getTableById(@PathVariable Long id) {
-        Table table = tableService.getTableById(id);
+    public ResponseEntity<Tables> getTableById(@PathVariable Long id) {
+        Tables table = tableService.getTableById(id);
         if (table != null) {
             return ResponseEntity.ok(table);
         } else {
@@ -39,14 +39,14 @@ public class TableController {
     }
 
     @PostMapping("/addTable")
-    public Table createTable(@RequestBody Table table) {
+    public Tables createTable(@RequestBody Tables table) {
         return tableService.addTable(table);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Table> updateTable(@PathVariable Long id, @RequestBody Table table) {
+    public ResponseEntity<Tables> updateTable(@PathVariable Long id, @RequestBody Tables table) {
         table.setId(id);
-        Table updatedTable = tableService.updateTable(table);
+        Tables updatedTable = tableService.updateTable(table);
         if (updatedTable != null) {
             return ResponseEntity.ok(updatedTable);
         } else {

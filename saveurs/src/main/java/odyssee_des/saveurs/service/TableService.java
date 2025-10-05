@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
-import odyssee_des.saveurs.model.sql.Table;
+import odyssee_des.saveurs.model.sql.Tables;
 import odyssee_des.saveurs.repository.TableRepository;
 
 @Service
@@ -18,16 +18,16 @@ public class TableService {
         this.tr = t;
     }
 
-    public List<Table> getAllTables(){
+    public List<Tables> getAllTables(){
         return tr.findAll();
     }
-    public Table getTableById(Long id){
+    public Tables getTableById(Long id){
         return tr.findById(id).orElse(null);
     }
-    public Table addTable(Table t){
+    public Tables addTable(Tables t){
         return tr.save(t);
     }
-    public Table updateTable(Table t){
+    public Tables updateTable(Tables t){
         if(t.getId() != 0 && tr.existsById(t.getId())) {
             return tr.save(t);
         }
