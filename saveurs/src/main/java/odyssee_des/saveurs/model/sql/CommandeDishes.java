@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "commande_dishes")
@@ -28,5 +27,39 @@ public class CommandeDishes {
     public Dishes dish;
 
     public Integer quantite;
-    public BigDecimal prix;
+    public Double prix;
+
+    
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public Commande getCommande() {
+        return commande;
+    }
+    public void setCommande(Commande commande) {
+        this.commande = commande;
+    }
+    public Dishes getDish() {
+        return dish;
+    }
+    public void setDish(Dishes dish) {
+        this.dish = dish;
+    }
+    public Integer getQuantite() {
+        return quantite;
+    }
+    public void setQuantite(Integer quantite) {
+        this.quantite = quantite;
+    }
+    public Double getPrix() {
+        return prix;
+    }
+    public void setPrix(Double prix) {
+        this.prix = prix;
+    }
+
+    
 }

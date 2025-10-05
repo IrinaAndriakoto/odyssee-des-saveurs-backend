@@ -21,28 +21,39 @@ public class CommandeController {
     private final CommandeService service;
     public CommandeController(CommandeService service) { this.service = service; }
 
-    @GetMapping
-    public ResponseEntity<List<Commande>> getAll() { return ResponseEntity.ok(service.getAll()); }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Commande>> getAllCommandes() { return ResponseEntity.ok(service.getAllCommandes()); }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Commande> getById(@PathVariable Long id) {
-        return service.getById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Commande> getCommandeById(@PathVariable Long id) {
+        Commande commande = service.getCommandeById(id);
+        if (commande != null) {
+            return ResponseEntity.ok(commande);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<Commande> create(@RequestBody Commande c) {
-        Commande created = service.create(c);
+    @PostMapping("/add")
+    public ResponseEntity<Commande> createCommande(@RequestBody Commande c) {
+        Commande created = service.createCommande(c);
         return ResponseEntity.status(201).body(created);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Commande> update(@PathVariable Long id, @RequestBody Commande c) {
-        return ResponseEntity.ok(service.update(id, c));
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Commande> updateCommande(@PathVariable Long id, @RequestBody Commande c) {
+        c.setIdCommande(id);
+        Commande updated = service.updateCommande(c);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
+    public ResponseEntity<Void> deleteCommande(@PathVariable Long id) {
+        service.deleteCommande(id);
         return ResponseEntity.noContent().build();
     }
 }

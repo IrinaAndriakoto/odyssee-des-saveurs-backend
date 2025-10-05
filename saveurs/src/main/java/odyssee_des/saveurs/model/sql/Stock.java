@@ -14,13 +14,48 @@ import jakarta.persistence.Table;
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    @Column(name="id")
+    private Long id;
 
     @Column(name = "produit_nom", nullable = false)
-    public String produitNom;
+    private String produitNom;
 
-    public Integer quantite;
+    private Integer quantite;
 
     @Column(name = "date_insertion")
-    public LocalDateTime dateInsertion = LocalDateTime.now();
+    private LocalDateTime dateInsertion = LocalDateTime.now();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getProduitNom() {
+        return produitNom;
+    }
+
+    public void setProduitNom(String produitNom) {
+        this.produitNom = produitNom;
+    }
+
+    public Integer getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(Integer quantite) {
+        this.quantite = quantite;
+    }
+
+    public LocalDateTime getDateInsertion() {
+        return dateInsertion;
+    }
+
+    public void setDateInsertion(LocalDateTime dateInsertion) {
+        this.dateInsertion = dateInsertion;
+    }
+
+    
 }

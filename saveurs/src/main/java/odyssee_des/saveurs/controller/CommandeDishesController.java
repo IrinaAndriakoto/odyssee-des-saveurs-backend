@@ -1,11 +1,20 @@
 package odyssee_des.saveurs.controller;
 
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import odyssee_des.saveurs.model.sql.CommandeDishes;
 import odyssee_des.saveurs.service.CommandeDishesService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/commande-dishes")
@@ -13,27 +22,27 @@ public class CommandeDishesController {
     private final CommandeDishesService service;
     public CommandeDishesController(CommandeDishesService service) { this.service = service; }
 
-    @GetMapping
-    public ResponseEntity<List<CommandeDishes>> getAll() { return ResponseEntity.ok(service.getAll()); }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<CommandeDishes>> getAllCommandeDishes() { return ResponseEntity.ok(service.getAllCommandeDishes()); }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CommandeDishes> getById(@PathVariable Long id) {
-        return service.getById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<CommandeDishes> getCommandeDishesById(@PathVariable Long id) {
+        return service.getCommandeDishesById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<CommandeDishes> create(@RequestBody CommandeDishes cd) {
-        return ResponseEntity.status(201).body(service.create(cd));
+    @PostMapping("/add")
+    public ResponseEntity<CommandeDishes> addCommandeDishes(@RequestBody CommandeDishes cd) {
+        return ResponseEntity.status(201).body(service.addCommandeDishes(cd));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CommandeDishes> update(@PathVariable Long id, @RequestBody CommandeDishes cd) {
-        return ResponseEntity.ok(service.update(id, cd));
+    @PutMapping("/update")
+    public ResponseEntity<CommandeDishes> updateCommandeDishes(@RequestBody CommandeDishes cd) {
+        CommandeDishes upt = service.updateCommandeDishes(cd);
+        return new ResponseEntity<>(upt, HttpStatus.OK);
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
+    public ResponseEntity<Void> deleteCommandeDishes(@PathVariable Long id) {
+        service.deleteCommandeDishes(id);
         return ResponseEntity.noContent().build();
     }
 }
