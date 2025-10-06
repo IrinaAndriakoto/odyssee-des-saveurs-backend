@@ -27,7 +27,7 @@ public class Commande {
     // relation vers Table (existante) - optionnel, adapte si tu préfères stocker id seulement
     @ManyToOne
     @JoinColumn(name = "table_id")
-    public Table table_id;
+    public Tables table_id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -48,10 +48,10 @@ public class Commande {
         this.id = idCommande;
     }
 
-    public Table getTable() {
+    public Tables getTable() {
         return this.table_id;
     }
-    public void setTable(Table table) {
+    public void setTable(Tables table) {
         this.table_id = table;
     }
 
