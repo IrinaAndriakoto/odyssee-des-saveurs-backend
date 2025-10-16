@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
+import odyssee_des.saveurs.dto.UpdateUserDTO;
 import odyssee_des.saveurs.model.sql.User;
 import odyssee_des.saveurs.repository.UserRepository;
 
@@ -30,12 +31,26 @@ public class UserService {
         return ur.save(u);
     }
 
-    public User udpateUser(User u){
+    public User updateUser(User u){
         if(u.getId() != 0 && ur.existsById(u.getId())){
             return ur.save(u);
         } else {
             throw new EntityNotFoundException("L'utilisateur n'existe pas.");
         }
+    }
+
+    public User updateUserFields(Long id, UpdateUserDTO dto) {
+        User existing = ur.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        if (dto.getUsername() != null && !dto.getUsername().isBlank())
+            existing.setUsername(dto.getUsername());
+        if (dto.getFirstName() != null && !dto.getFirstName().isBlank())
+            existing.setFirstName(dto.getFirstName());
+        if (dto.getLastName() != null && !dto.getLastName().isBlank())
+            existing.setLastName(dto.getLastName());
+
+        return ur.save(existing);
     }
 
     public void deleteUser(Long id){

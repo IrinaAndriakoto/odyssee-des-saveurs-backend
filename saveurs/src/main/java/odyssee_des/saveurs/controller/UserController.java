@@ -1,7 +1,7 @@
 package odyssee_des.saveurs.controller;
 
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import odyssee_des.saveurs.dto.UpdateUserDTO;
 import odyssee_des.saveurs.model.sql.User;
 import odyssee_des.saveurs.repository.UserRepository;
 import odyssee_des.saveurs.security.JwtUtil;
@@ -78,10 +80,26 @@ public class UserController {
         return new ResponseEntity<>(us, HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateUser")
-    public ResponseEntity<User> updateUser(@RequestBody User u) {
-        User us = uS.udpateUser(u);
-        return new ResponseEntity<>(us,HttpStatus.OK);
+    // @PutMapping("/update/{id}")
+    // public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User u){
+    //     if (!id.equals(u.getId())) {
+    //         return ResponseEntity.badRequest().body("ID mismatch between path and body");
+    //     }
+
+    //     Optional<User> existing = userRepository.findById(id);
+    //     if (existing.isEmpty()) {
+    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    //     }
+    // }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UpdateUserDTO dto) {
+        try {
+            User updated = uS.updateUserFields(id, dto);
+            return ResponseEntity.ok(updated);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/deleteUser/{id}")
