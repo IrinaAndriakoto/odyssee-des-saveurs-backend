@@ -1,6 +1,6 @@
 package odyssee_des.saveurs.model.sql;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

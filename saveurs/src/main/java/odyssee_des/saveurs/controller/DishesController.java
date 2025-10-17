@@ -1,7 +1,7 @@
 package odyssee_des.saveurs.controller;
 
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,8 +54,9 @@ public class DishesController {
         return new ResponseEntity<>(newDish, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Dishes> updateDish(@RequestBody Dishes d) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Dishes> updateDish(@PathVariable Long id,@RequestBody Dishes d) {
+        d.setId(id);
         Dishes updatedDish = dservice.updateDish(d);
         return new ResponseEntity<>(updatedDish, HttpStatus.OK);
     }
