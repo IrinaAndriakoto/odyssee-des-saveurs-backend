@@ -22,6 +22,10 @@ public class Stock {
 
     private Integer quantite;
 
+    private String unite;
+
+    private Double prix;
+
     @Column(name = "date_insertion")
     private LocalDateTime dateInsertion = LocalDateTime.now();
 
@@ -55,6 +59,22 @@ public class Stock {
 
     public void setDateInsertion(LocalDateTime dateInsertion) {
         this.dateInsertion = dateInsertion;
+    }
+
+    public Double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Double prix) {
+        this.prix = prix;
+    }
+
+    public String getUnite() {
+        return unite;
+    }
+
+    public void setUnite(String unite) {
+        this.unite = unite;
     }
 
     

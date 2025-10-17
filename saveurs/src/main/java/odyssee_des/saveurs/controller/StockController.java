@@ -40,8 +40,9 @@ public class StockController {
         return ResponseEntity.status(201).body(service.addStock(s));
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Stock> updateStock(@RequestBody Stock s) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Stock> updateStock(@PathVariable Long id, @RequestBody Stock s) {
+        s.setId(id);
         return ResponseEntity.ok(service.updateStock(s));
     }
 
