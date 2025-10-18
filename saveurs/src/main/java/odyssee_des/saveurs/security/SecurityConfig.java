@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .and()
                 .csrf(csrf -> csrf.disable()) //  pas de CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login").permitAll() //  public
+                        .requestMatchers("/auth/register", "/auth/login","/dishes/getAll","/reservations/postReservation").permitAll() //  public
                         .anyRequest().authenticated() // 🔒 le reste protégé
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) //  ajout du filtre

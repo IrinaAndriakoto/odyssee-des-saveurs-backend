@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import odyssee_des.saveurs.inc.ReservationStatus;
 
 import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 public class Reservation {
@@ -20,8 +20,8 @@ public class Reservation {
     private String email;
     private Double phone;
     private Integer partySize;
-    private Date preferedDate;
-    private Time preferedTime;
+    private Date preferredDate;
+    private LocalTime preferredTime;
     private String specialRequests;
 
     @Enumerated(EnumType.STRING)
@@ -35,7 +35,7 @@ public class Reservation {
     }
     public void setId(Long id) {
         this.id = id;
-    }
+    }       
     public String getFullname() {
         return fullname;
     }
@@ -60,17 +60,17 @@ public class Reservation {
     public void setPartySize(Integer partySize) {
         this.partySize = partySize;
     }
-    public Date getPreferedDate() {
-        return preferedDate;
+    public Date getPreferredDate() {
+        return preferredDate;
     }
-    public void setPreferedDate(Date preferedDate) {
-        this.preferedDate = preferedDate;
+    public void setPreferredDate(Date preferredDate) {
+        this.preferredDate = preferredDate;
     }
-    public Time getPreferedTime() {
-        return preferedTime;
+    public LocalTime getPreferredTime() {
+        return preferredTime;
     }
-    public void setPreferedTime(Time preferedTime) {
-        this.preferedTime = preferedTime;
+    public void setPreferredTime(LocalTime preferredTime) {
+        this.preferredTime = preferredTime;
     }
     public String getSpecialRequests() {
         return specialRequests;
