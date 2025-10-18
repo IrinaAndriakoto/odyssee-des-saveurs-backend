@@ -66,5 +66,6 @@ public class DishesController {
         dservice.deleteDishes(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     
 }
