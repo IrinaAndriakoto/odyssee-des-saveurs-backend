@@ -18,7 +18,7 @@ public class Reservation {
     private Long id;
     private String fullname;
     private String email;
-    private Double phone;
+    private String phone;
     private Integer partySize;
     private Date preferredDate;
     private LocalTime preferredTime;
@@ -48,10 +48,10 @@ public class Reservation {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Double getPhone() {
+    public String getPhone() {
         return phone;
     }
-    public void setPhone(Double phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     public Integer getPartySize() {
