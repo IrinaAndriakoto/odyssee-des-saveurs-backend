@@ -30,13 +30,20 @@ public class CommandeDishesController {
         return service.getCommandeDishesById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/{id}/dishes")
+    public ResponseEntity<List<CommandeDishes>> getDishesByCommande(@PathVariable("id") Long id) {
+        List<CommandeDishes> list = service.getAllDishesByCommandeId(id);
+        return ResponseEntity.ok(list);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<CommandeDishes> addCommandeDishes(@RequestBody CommandeDishes cd) {
         return ResponseEntity.status(201).body(service.addCommandeDishes(cd));
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<CommandeDishes> updateCommandeDishes(@RequestBody CommandeDishes cd) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CommandeDishes> updateCommandeDishes(@PathVariable Long id, @RequestBody CommandeDishes cd) {
+        cd.setId(id);
         CommandeDishes upt = service.updateCommandeDishes(cd);
         return new ResponseEntity<>(upt, HttpStatus.OK);
     }

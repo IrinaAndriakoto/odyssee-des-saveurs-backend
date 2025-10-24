@@ -26,6 +26,9 @@ public class CommandeDishesService {
     public Optional<CommandeDishes> getCommandeDishesById(Long id) {
         return repository.findById(id);
     }
+    public List<CommandeDishes> getAllDishesByCommandeId(Long commandeId){
+        return repository.findByCommande_Id(commandeId);
+    }
     public CommandeDishes addCommandeDishes(CommandeDishes cd) {
         return repository.save(cd);
     }

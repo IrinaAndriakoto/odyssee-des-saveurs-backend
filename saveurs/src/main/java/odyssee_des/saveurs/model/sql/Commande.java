@@ -7,6 +7,8 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import odyssee_des.saveurs.inc.CommandesStatus;
 
 
 @Entity
@@ -29,18 +32,19 @@ public class Commande {
     @JoinColumn(name = "table_id")
     public Tables table_id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    public User user_id;
+    private String client; 
 
     public LocalDateTime date = LocalDateTime.now();
 
-    public String status;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CommandesStatus status = CommandesStatus.EN_ATTENTE;
 
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<CommandeDishes> commandeDishes = new ArrayList<>();
 
-
+    public Commande(){}
+    
     public Long getIdCommande() {
         return this.id;
     }
@@ -55,11 +59,11 @@ public class Commande {
         this.table_id = table;
     }
 
-    public User getId_user() {
-        return this.user_id;
+    public String getClient() {
+        return this.client;
     }
-    public void setId_user(User id_user) {
-        this.user_id = id_user;
+    public void setClient(String client) {
+        this.client = client;
     }
 
     public LocalDateTime getDate() {
@@ -69,10 +73,10 @@ public class Commande {
         this.date = date;
     }
 
-    public String getStatus() {
+    public CommandesStatus getStatus() {
         return status;
     }
-    public void setStatus(String status) {
+    public void setStatus(CommandesStatus status) {
         this.status = status;
     }
 

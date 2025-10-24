@@ -27,8 +27,8 @@ public class CommandeDishes {
     public Dishes dish;
 
     public Integer quantite;
-    public Double prix;
 
+    public CommandeDishes(){}
     
     public Long getId() {
         return id;
@@ -54,12 +54,5 @@ public class CommandeDishes {
     public void setQuantite(Integer quantite) {
         this.quantite = quantite;
     }
-    public Double getPrix() {
-        return prix;
-    }
-    public void setPrix(Double prix) {
-        this.prix = prix;
-    }
-
     
 }

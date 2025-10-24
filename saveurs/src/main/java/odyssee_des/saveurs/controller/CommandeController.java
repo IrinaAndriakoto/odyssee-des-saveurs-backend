@@ -56,4 +56,22 @@ public class CommandeController {
         service.deleteCommande(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/expedier/{id}")
+    public ResponseEntity<Commande> expedierCommande(@PathVariable Long id) {
+        Commande updated = service.expedierCommande(id);
+        return ResponseEntity.ok(updated);
+    }
+
+    @PutMapping("/livrer/{id}")
+    public ResponseEntity<Commande> livrerCommande(@PathVariable Long id) {
+        Commande updated = service.livrerCommande(id);
+        return ResponseEntity.ok(updated);
+    }
+
+    @PutMapping("/annuler/{id}")
+    public ResponseEntity<Commande> annulerCommande(@PathVariable Long id) {
+        Commande updated = service.annulerCommande(id);
+        return ResponseEntity.ok(updated);
+    }
 }
