@@ -12,21 +12,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import odyssee_des.saveurs.model.sql.Commande;
+import odyssee_des.saveurs.dto.CommandeDTO;
 import odyssee_des.saveurs.service.CommandeService;
 
 @RestController
 @RequestMapping("/commandes")
 public class CommandeController {
+
     private final CommandeService service;
+
     public CommandeController(CommandeService service) { this.service = service; }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Commande>> getAllCommandes() { return ResponseEntity.ok(service.getAllCommandes()); }
+    public ResponseEntity<List<CommandeDTO>> getAllCommandes() { return ResponseEntity.ok(service.getAllCommandes()); }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Commande> getCommandeById(@PathVariable Long id) {
-        Commande commande = service.getCommandeById(id);
+    public ResponseEntity<CommandeDTO> getCommandeById(@PathVariable Long id) {
+        CommandeDTO commande = service.getCommandeById(id);
         if (commande != null) {
             return ResponseEntity.ok(commande);
         } else {
@@ -35,15 +37,15 @@ public class CommandeController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Commande> createCommande(@RequestBody Commande c) {
-        Commande created = service.createCommande(c);
+    public ResponseEntity<CommandeDTO> createCommande(@RequestBody CommandeDTO c) {
+        CommandeDTO created = service.createCommande(c);
         return ResponseEntity.status(201).body(created);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Commande> updateCommande(@PathVariable Long id, @RequestBody Commande c) {
-        c.setIdCommande(id);
-        Commande updated = service.updateCommande(c);
+    public ResponseEntity<CommandeDTO> updateCommande(@PathVariable Long id, @RequestBody CommandeDTO c) {
+        c.setId(id);
+        CommandeDTO updated = service.updateCommande(c);
         if (updated != null) {
             return ResponseEntity.ok(updated);
         } else {
@@ -52,26 +54,25 @@ public class CommandeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCommande(@PathVariable Long id) {
+    public void deleteCommande(@PathVariable Long id) {
         service.deleteCommande(id);
-        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/expedier/{id}")
-    public ResponseEntity<Commande> expedierCommande(@PathVariable Long id) {
-        Commande updated = service.expedierCommande(id);
+    public ResponseEntity<CommandeDTO> expedierCommande(@PathVariable Long id) {
+        CommandeDTO updated = service.expedierCommande(id);
         return ResponseEntity.ok(updated);
     }
 
     @PutMapping("/livrer/{id}")
-    public ResponseEntity<Commande> livrerCommande(@PathVariable Long id) {
-        Commande updated = service.livrerCommande(id);
+    public ResponseEntity<CommandeDTO> livrerCommande(@PathVariable Long id) {
+        CommandeDTO updated = service.livrerCommande(id);
         return ResponseEntity.ok(updated);
     }
 
     @PutMapping("/annuler/{id}")
-    public ResponseEntity<Commande> annulerCommande(@PathVariable Long id) {
-        Commande updated = service.annulerCommande(id);
+    public ResponseEntity<CommandeDTO> annulerCommande(@PathVariable Long id) {
+        CommandeDTO updated = service.annulerCommande(id);
         return ResponseEntity.ok(updated);
     }
 }

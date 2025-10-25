@@ -1,7 +1,11 @@
 package odyssee_des.saveurs.model.sql;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,22 +15,24 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "commande_dishes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CommandeDishes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    public Long id;
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     @JoinColumn(name = "commande_id")
-    public Commande commande;
+    private Commande commande;
 
     // Relation vers Dishes existant
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dish_id")
-    public Dishes dish;
+    private Dishes dish;
 
-    public Integer quantite;
+    private Integer quantite;
 
     public CommandeDishes(){}
     
